@@ -479,11 +479,13 @@ display: flex;
     } 
    
    
-#page5{
+
+    #page5{
       font-family: 'Segoe UI', sans-serif;
-      background: #000000;
+      background: #00000000;
       margin: 0;
       padding: 20px;
+      width: 80vw;
     }
     
     
@@ -494,7 +496,9 @@ display: flex;
       justify-content: center;
       margin: auto;
       max-width: 1200px;
+      background: #00000000;
       padding: 20px;
+      ma
     }
     
     .card {
@@ -508,6 +512,7 @@ display: flex;
       transition: transform 0.2s ease;
       display: flex;
       flex-direction: column;
+      
     }
     
     .card:hover {
@@ -549,7 +554,15 @@ display: flex;
       color: #2b6cb0;
       margin-bottom: 30px;
       font-size: 32px;
+      height: fit-content;
     }
-    
-    
+
+    #residue{
+      font-family: 'Segoe UI', sans-serif;
+      background: #00000000;
+      margin: 0;
+      padding: 20px;
+      width: 80vw;
+      height: 120vh;
+    }
     
