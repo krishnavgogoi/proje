@@ -1,6 +1,6 @@
 # proje
 
-#  Cricket Live Match App
+#  Cricket Based Website
 
 A simple web application that displays  cricket matches, including teams, match type, venue, date, time, and live scores using the **CricAPI**.
 
