@@ -201,8 +201,8 @@ async function loadFlags() {
 
     loadMatches(); // Proceed to load matches after flags are ready
   } catch (err) {
-    console.error("Error loading flags:", err.message);
-    container.innerHTML = `<p style="color:red;">Error loading flags</p>`;
+    console.error("Error loading :", err.message);
+    container.innerHTML = `<p style="color:red;">Error loading </p>`;
   }
 }
 
