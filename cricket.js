@@ -186,34 +186,63 @@ ScrollTrigger.create({
 
 
 
-  const apiKey = "25b63097-532d-42f9-b62d-814cd2dd9af7";
-  const matchId = "0ce7da43-c15a-4df0-811b-8103d9e1b19a";
 
-  fetch(`https://api.cricapi.com/v1/match_info?apikey=${apiKey}&id=${matchId}`)
-    .then(res => res.json())
-    .then(response => {
-      const match = response.data;
 
-      document.getElementById("match-name").textContent = match.name;
-      document.getElementById("match-venue").textContent = `Venue: ${match.venue}`;
-      document.getElementById("match-date").textContent = `Date: ${match.date}`;
-      document.getElementById("match-status").textContent = `Status: ${match.status}`;
 
-      const scoresDiv = document.getElementById("scores");
-      scoresDiv.innerHTML = ""; // clear previous
+const apiKey = "25b63097-532d-42f9-b62d-814cd2dd9af7";
+const url = `https://api.cricapi.com/v1/cricScore?apikey=${apiKey}`;
+const container = document.getElementById("match-container");
 
-      match.score.forEach(inning => {
-        const box = document.createElement("div");
-        box.classList.add("inning-box");
-        box.innerHTML = `
-          <strong>${inning.inning}</strong><br>
-          Runs: ${inning.r} | Wickets: ${inning.w} | Overs: ${inning.o}
-        `;
-        scoresDiv.appendChild(box);
-      });
-    })
-    .catch(err => {
-      console.error("Error fetching scoreboard:", err);
-      document.getElementById("scoreboard").innerHTML = "<p>Failed to load scoreboard.</p>";
+async function loadScores() {
+  try {
+    const response = await fetch(url);
+    const result = await response.json();
+
+    if (result.status !== "success") {
+      throw new Error("Failed to fetch scores");
+    }
+
+    const matches = result.data;
+
+    if (!matches || matches.length === 0) {
+      container.innerHTML = `<p>No matches available.</p>`;
+      return;
+    }
+
+    container.innerHTML = "";
+
+    // 🔥 Filter for India matches only
+    const indiaMatches = matches.filter(match =>
+      (match.t1 && match.t1.toLowerCase().includes("india")) ||
+      (match.t2 && match.t2.toLowerCase().includes("india"))
+    );
+
+    if (indiaMatches.length === 0) {
+      container.innerHTML = `<p>No current India matches available.</p>`;
+      return;
+    }
+
+    // 🔥 Limit to first 4 matches
+    const selectedMatches = indiaMatches.slice(0, 4);
+
+    selectedMatches.forEach(match => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <h2>${match.t1} vs ${match.t2}</h2>
+        <div class="info"><strong>Match Type:</strong> ${match.matchType || "N/A"}</div>
+        <div class="info"><strong>Status:</strong> ${match.status || "N/A"}</div>
+        <div class="info"><strong>Score:</strong> ${match.score || "Score not available"}</div>
+      `;
+
+      container.appendChild(card);
     });
 
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = `<p style="color:red;">Error loading scores.</p>`;
+  }
+}
+
+loadScores();
