@@ -39,8 +39,8 @@ gsap.to("#left2",{
         trigger: "#anim", 
         scroller:"body",   
         start: "top 50%",  
-        end: "top -9%",     // optional: end of trigger range
-        scrub: true,        // smooth link to scroll position
+        end: "top -9%",    
+        scrub: true,       
          
        
     }
@@ -54,8 +54,8 @@ gsap.to("#right2",{
         trigger: "#anim", 
         scroller:"body",   
         start: "top 50%",  
-        end: "top -9%",     // optional: end of trigger range
-        scrub: true,        // smooth link to scroll position
+        end: "top -9%",     
+        scrub: true,       
          
        
     }
@@ -69,8 +69,8 @@ gsap.from("#page3 #infbox ",{
         trigger: "#infbox", 
         scroller:"body",   
         start: "top 50%",  
-        end: "top -9%",     // optional: end of trigger range
-        scrub: true,        // smooth link to scroll position
+        end: "top -9%",     
+        scrub: true,       
            
        
     }
@@ -178,7 +178,7 @@ ScrollTrigger.create({
 
 
 
-const apiKey = "25b63097-532d-42f9-b62d-814cd2dd9af7";
+const apiKey = "aaaaaaaaaaaaaaaa";
 const countriesURL = `https://api.cricapi.com/v1/countries?apikey=${apiKey}`;
 const matchesURL = `https://api.cricapi.com/v1/currentMatches?apikey=${apiKey}`;
 const container = document.getElementById("match-container");
